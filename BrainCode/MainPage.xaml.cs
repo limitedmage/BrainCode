@@ -25,7 +25,15 @@ namespace BrainCode {
             var bf = new Brainfuck(
                 Code.Text,
                 (c) => output.Append(c),
-                () => 'a'
+                () => {
+                    if (Input.Text != string.Empty) {
+                        char next = Input.Text[0];
+                        Input.Text = Input.Text.Substring(1);
+                        return next;
+                    } else {
+                        return (char)0;
+                    }
+                }
             );
 
             bf.Run();
@@ -35,7 +43,11 @@ namespace BrainCode {
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e) {
             // hello world program
-            Code.Text = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
+            //Code.Text = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
+
+            // cat program
+            Code.Text = ",[.,]";
+            Input.Text = "echo me this";
         }
     }
 }

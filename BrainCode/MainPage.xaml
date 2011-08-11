@@ -30,7 +30,10 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <TextBox Name="Code" AcceptsReturn="True" TextWrapping="Wrap" Height="500" />
+                <TextBlock Text="Code" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="Code" AcceptsReturn="True" TextWrapping="Wrap" Height="400" />
+                <TextBlock Text="Input" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBox Name="Input" />
                 <Button Content="Run" Name="RunButton" Click="RunButton_Click" />
             </StackPanel>
         </Grid>
