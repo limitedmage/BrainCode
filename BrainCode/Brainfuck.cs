@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Linq;
 
 namespace BrainCode {
     public class Brainfuck {
@@ -20,7 +22,10 @@ namespace BrainCode {
         public delegate char inputCallback();
         private inputCallback handleInput;
 
-        public Brainfuck(string sourceCode, outputCallback outcb, inputCallback incb) {
+        public delegate void breakpointCallback(string traceData);
+        private breakpointCallback handleBreakpoint;
+
+        public Brainfuck(string sourceCode, outputCallback outcb, inputCallback incb, breakpointCallback bpcb) {
             code = sourceCode;
             memory = new char[MEMORY_SIZE];
             stack = new int[STACK_SIZE];
@@ -31,6 +36,7 @@ namespace BrainCode {
 
             handleOutput = outcb;
             handleInput = incb;
+            handleBreakpoint = bpcb;
         }
 
         public bool SanityCheck() {
@@ -87,6 +93,10 @@ namespace BrainCode {
                 case ']':
                     CloseLoop();
                     break;
+                case 'b':
+                    handleBreakpoint(Trace());
+                    pc += 1;
+                    break;
                 default:
                     // invalid character, continue
                     pc += 1;
@@ -117,6 +127,23 @@ namespace BrainCode {
             // pop stack
             sc -= 1;
             pc = stack[sc];
+        }
+
+        private string Trace() {
+            var sb = new StringBuilder();
+            sb.AppendLine("pc: " + pc);
+
+            var memtrace = new int[10];
+            Array.Copy(memory, memtrace, 10);
+            sb.AppendLine("memory: " + string.Join(", ", memtrace));
+            sb.AppendLine("mc: " + mc);
+
+            var stacktrace = new int[10];
+            Array.Copy(stack, stacktrace, 10);
+            sb.AppendLine("stack: " + string.Join(", ", stacktrace));
+            sb.AppendLine("sc: " + sc);
+
+            return sb.ToString();
         }
     }
 }

@@ -33,12 +33,13 @@ namespace BrainCode {
                     } else {
                         return (char)0;
                     }
-                }
+                },
+                (trace) => MessageBox.Show(trace, "Debug trace", MessageBoxButton.OK)
             );
 
             bf.Run();
 
-            MessageBox.Show(output.ToString());
+            MessageBox.Show(output.ToString(), "Output", MessageBoxButton.OK);
         }
 
         private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e) {
