@@ -46,8 +46,12 @@ namespace BrainCode {
             //Code.Text = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
 
             // cat program
-            Code.Text = ",[.,]";
-            Input.Text = "echo me this";
+            //Code.Text = ",[.,]";
+            //Input.Text = "echo me this";
+
+            // addition
+            Code.Text = ",>++++++[<-------->-],[<+>-]<.";
+            Input.Text = "43";
         }
     }
 }

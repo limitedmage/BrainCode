@@ -58,11 +58,11 @@ namespace BrainCode {
         public void RunOneStatement(char c) {
             switch (c) {
                 case '-':
-                    memory[mc] -= (char)1;
+                    memory[mc] -= (char) 1;
                     pc += 1;
                     break;
                 case '+':
-                    memory[mc] += (char)1;
+                    memory[mc] += (char) 1;
                     pc += 1;
                     break;
                 case '<':
@@ -79,7 +79,7 @@ namespace BrainCode {
                     break;
                 case ',':
                     memory[mc] = handleInput();
-                    pc += 1;    
+                    pc += 1;
                     break;
                 case '[':
                     OpenLoop();
@@ -101,6 +101,7 @@ namespace BrainCode {
                 while (closeCounter < code.Length) {
                     if (code[closeCounter] == ']') {
                         pc = closeCounter + 1;
+                        break;
                     }
                     closeCounter += 1;
                 }
