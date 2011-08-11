@@ -72,7 +72,7 @@ namespace BrainCode {
                     pc += 1;
                     break;
                 case '+':
-                    memory[mc] -= (char)1;
+                    memory[mc] += (char)1;
                     pc += 1;
                     break;
                 case '<':
@@ -81,6 +81,7 @@ namespace BrainCode {
                     break;
                 case '>':
                     mc += 1;
+                    pc += 1;
                     break;
                 case '.':
                     handleOutput(memory[mc]);
@@ -111,6 +112,7 @@ namespace BrainCode {
                     if (code[closeCounter] == ']') {
                         pc = closeCounter + 1;
                     }
+                    closeCounter += 1;
                 }
             } else {
                 // push stack
