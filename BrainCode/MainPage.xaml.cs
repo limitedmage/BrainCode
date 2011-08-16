@@ -22,7 +22,7 @@ namespace BrainCode {
         private void RunButton_Click(object sender, RoutedEventArgs e) {
             StringBuilder output = new StringBuilder();
 
-            var bf = new Brainfuck(
+            var bf = new Lolcode(
                 Code.Text,
                 (c) => output.Append(c),
                 () => {
@@ -51,8 +51,10 @@ namespace BrainCode {
             //Input.Text = "echo me this";
 
             // addition
-            Code.Text = ",>++++++[<-------->-],[<+>-]<.";
-            Input.Text = "43";
+            // Code.Text = ",>++++++[<-------->-],[<+>-]<.";
+            // Input.Text = "43";
+
+            Code.Text = "HAI\nVISIBLE \"HAI WORLD\"\nKTHXBYE";
         }
     }
 }
