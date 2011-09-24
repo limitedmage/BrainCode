@@ -4,16 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True"
-    Loaded="PhoneApplicationPage_Loaded">
-
+    shell:SystemTray.IsVisible="True">
+	
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -24,31 +24,70 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="BRAINCODE" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="code" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <StackPanel>
-                <TextBlock Text="Code" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="Code" AcceptsReturn="True" TextWrapping="Wrap" Height="400" />
-                <TextBlock Text="Input" Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBox Name="Input" />
-                <Button Content="Run" Name="RunButton" Click="RunButton_Click" />
-            </StackPanel>
+            <Grid>
+            	<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="230" />
+				</Grid.RowDefinitions>
+                <TextBox Name="Code" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="0"/>
+                <Grid Name="Keyboard" Background="{StaticResource PhoneChromeBrush}" Grid.Row="1" Margin="-12,0">
+					<Grid.RowDefinitions>
+						<RowDefinition />
+						<RowDefinition />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+					
+					<Button Content="&lt;" Grid.Row="0" Grid.Column="0" Click="Key_Click" />
+                    <Button Content="&gt;" Grid.Row="0" Grid.Column="1" Click="Key_Click" />
+                    <Button Content="+"    Grid.Row="0" Grid.Column="2" Click="Key_Click" />
+                    <Button Content="-"    Grid.Row="0" Grid.Column="3" Click="Key_Click" />
+                    <Button Content="←"    Grid.Row="0" Grid.Column="4" Click="Key_Click" />
+
+                    <Button Content="." Grid.Row="1" Grid.Column="0" Click="Key_Click" />
+                    <Button Content="," Grid.Row="1" Grid.Column="1" Click="Key_Click" />
+                    <Button Content="[" Grid.Row="1" Grid.Column="2" Click="Key_Click" />
+                    <Button Content="]" Grid.Row="1" Grid.Column="3" Click="Key_Click" />
+                    <Button Content="↵" Grid.Row="1" Grid.Column="4" Click="Key_Click" />
+
+                    <Button Content="b" Grid.Row="2" Grid.Column="0" Click="Key_Click" />
+                    <Button Content=" " Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Click="Key_Click" />
+					
+				</Grid>
+			</Grid>
         </Grid>
+
+        <toolkit:ListPicker Name="SamplePicker" SelectionChanged="SamplePicker_SelectionChanged" ExpansionMode="FullScreenOnly" FullModeHeader="Samples" Visibility="Collapsed">
+            <toolkit:ListPicker.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Key}" />
+                </DataTemplate>
+            </toolkit:ListPicker.ItemTemplate>
+            <toolkit:ListPicker.FullModeItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Key}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" Margin="0,12" />
+                </DataTemplate>
+            </toolkit:ListPicker.FullModeItemTemplate>
+        </toolkit:ListPicker>
     </Grid>
- 
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.questionmark.rest.png" Text="help" Click="Help_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.favs.rest.png" Text="samples" Click="Samples_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.transport.play.rest.png" Text="run" Click="Run_Click"/>
         </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
+    </phone:PhoneApplicationPage.ApplicationBar>
+
 
 </phone:PhoneApplicationPage>

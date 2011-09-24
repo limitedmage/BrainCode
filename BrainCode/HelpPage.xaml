@@ -1,0 +1,71 @@
+﻿<phone:PhoneApplicationPage 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+	x:Class="BrainCode.HelpPage"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	SupportedOrientations="Portrait" Orientation="Portrait"
+	shell:SystemTray.IsVisible="True">
+
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<!--Pivot Control-->
+		<controls:Pivot Title="BRAINCODE">
+			<!--Pivot item one-->
+			<controls:PivotItem Header="help">
+				<Grid>
+					<RichTextBox FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Top">
+						<Paragraph>
+							<Run>
+								Brainf*ck is an esoteric programming language designed to be extremely minimalist.
+							</Run>
+							<LineBreak/>
+						</Paragraph>
+						<Paragraph>
+							<Run>
+								This app will let you code, run, and debug brainf*ck programs.
+							</Run>
+							<LineBreak/>
+						</Paragraph>
+						<Paragraph>
+							<Run>
+								You can load a sample or write your own.
+							</Run>
+							<LineBreak/>
+						</Paragraph>
+						<Paragraph>
+							<Run>
+								Use the 'b' letter to insert a breakpoint.
+							</Run>
+							<LineBreak/>
+						</Paragraph>
+						<Paragraph>
+							<Run>
+								For more info on brainf*ck, visit its
+							</Run>
+							<Hyperlink NavigateUri="http://en.wikipedia.org/wiki/Brainfuck" TargetName="_blank">Wikipedia page</Hyperlink>
+							<Run>.</Run>
+							<LineBreak />
+						</Paragraph>
+						
+						<Paragraph>
+							Braincode created by
+						</Paragraph>
+						<Paragraph>
+							<Hyperlink NavigateUri="http://julianapena.com" TargetName="_blank">Juliana Peña</Hyperlink>
+							-
+							<Hyperlink NavigateUri="http://twitter.com/limitedmage" TargetName="_blank">@limitedmage</Hyperlink>
+						</Paragraph>
+					</RichTextBox>
+				</Grid>
+			</controls:PivotItem>
+		</controls:Pivot>
+	</Grid>
+</phone:PhoneApplicationPage>

@@ -2,3 +2,4 @@ glob:BrainCode/obj/*
 glob:*.user
 glob:*.suo
 glob:BrainCode/Bin/*
+glob:_ReSharper*
