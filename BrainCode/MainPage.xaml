@@ -52,13 +52,13 @@
                     <Button Content="&gt;" Grid.Row="0" Grid.Column="1" Click="Key_Click" />
                     <Button Content="+"    Grid.Row="0" Grid.Column="2" Click="Key_Click" />
                     <Button Content="-"    Grid.Row="0" Grid.Column="3" Click="Key_Click" />
-                    <Button Content="←"    Grid.Row="0" Grid.Column="4" Click="Key_Click" />
+                    <Button Content="←"    Grid.Row="0" Grid.Column="4" Click="Key_Click" Name="BackspaceButton" />
 
                     <Button Content="." Grid.Row="1" Grid.Column="0" Click="Key_Click" />
                     <Button Content="," Grid.Row="1" Grid.Column="1" Click="Key_Click" />
                     <Button Content="[" Grid.Row="1" Grid.Column="2" Click="Key_Click" />
                     <Button Content="]" Grid.Row="1" Grid.Column="3" Click="Key_Click" />
-                    <Button Content="↵" Grid.Row="1" Grid.Column="4" Click="Key_Click" />
+                    <Button Content="↵" Grid.Row="1" Grid.Column="4" Click="Key_Click" Name="EnterButton" />
 
                     <Button Content="b" Grid.Row="2" Grid.Column="0" Click="Key_Click" />
                     <Button Content=" " Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Click="Key_Click" />

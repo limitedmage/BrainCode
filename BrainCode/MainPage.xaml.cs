@@ -19,7 +19,8 @@ namespace BrainCode {
         private Dictionary<string, string> _samples = new Dictionary<string, string>() {
             {"Hello world", "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."},
             {"Cat", ",[.,]"},
-            {"Addition", ",>++++++[<-------->-],[<+>-]<."}
+            {"Addition", ",>++++++[<-------->-],[<+>-]<."},
+            {"Blank", ""}
         };
 
         private IsolatedStorageSettings _settings = IsolatedStorageSettings.ApplicationSettings;
@@ -62,9 +63,14 @@ namespace BrainCode {
                     trace => MessageBox.Show(trace, "Debug trace", MessageBoxButton.OK)
                 );
 
-                bf.Run();
-
-                MessageBox.Show(output.ToString(), "Output", MessageBoxButton.OK);
+                try {
+                    bf.Run();
+                    MessageBox.Show(output.ToString(), "Output", MessageBoxButton.OK);
+                } catch (ArgumentException ae) {
+                    MessageBox.Show(ae.Message, "Error", MessageBoxButton.OK);
+                } catch (IndexOutOfRangeException iore) {
+                    MessageBox.Show("You exceeded the limit of memory or stack.", "Error", MessageBoxButton.OK);
+                }
             };
             ip.Show();
         }
@@ -72,17 +78,12 @@ namespace BrainCode {
         private void Key_Click(object sender, RoutedEventArgs e) {
             var b = e.OriginalSource as Button;
             if (b != null) {
-                var content = b.Content as string;
-                switch (content) {
-                    case "↵":
-                        Code.Text += '\n';
-                        break;
-                    case "←":
-                        Code.Text = Code.Text.Substring(0, Code.Text.Length - 1);
-                        break;
-                    default:
-                        Code.Text += content;
-                        break;
+                if (b == EnterButton) {
+                    Code.Text += '\n';
+                } else if (b == BackspaceButton) {
+                    Code.Text = Code.Text.Substring(0, Code.Text.Length - 1);
+                } else {
+                    Code.Text += b.Content as string;
                 }
             }
         }

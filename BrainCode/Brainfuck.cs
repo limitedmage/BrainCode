@@ -6,6 +6,7 @@ namespace BrainCode {
     public class Brainfuck {
         private static readonly int MEMORY_SIZE = 10000;
         private static readonly int STACK_SIZE = 1000;
+        private static readonly int RUN_LIMIT = 8000000;
 
         private string code;
         private int pc; // program counter
@@ -15,6 +16,8 @@ namespace BrainCode {
 
         private int[] stack;
         private int sc; // stack counter
+
+        private int rc; // run count
 
         public delegate void outputCallback(char output);
         private outputCallback handleOutput;
@@ -33,6 +36,7 @@ namespace BrainCode {
             pc = 0;
             mc = 0;
             sc = 0;
+            rc = 0;
 
             handleOutput = outcb;
             handleInput = incb;
@@ -56,52 +60,53 @@ namespace BrainCode {
         }
 
         public void Run() {
-            while (pc < code.Length) {
-                RunOneStatement(code[pc]);
+            if (SanityCheck()) {
+                while (pc < code.Length) {
+                    if (RunOneStatement(code[pc])) {
+                        pc += 1;
+                    }
+                    rc += 1;
+                    if (rc > RUN_LIMIT) {
+                        throw new ArgumentException("The code ran for too long. You probably have an infinite loop.");
+                    }
+                }
+            } else {
+                throw new ArgumentException("Code is invalid, check that all [ and ] match.");
             }
         }
 
-        public void RunOneStatement(char c) {
+        public bool RunOneStatement(char c) {
             switch (c) {
                 case '-':
                     memory[mc] -= (char) 1;
-                    pc += 1;
                     break;
                 case '+':
                     memory[mc] += (char) 1;
-                    pc += 1;
                     break;
                 case '<':
                     mc -= 1;
-                    pc += 1;
                     break;
                 case '>':
                     mc += 1;
-                    pc += 1;
                     break;
                 case '.':
                     handleOutput(memory[mc]);
-                    pc += 1;
                     break;
                 case ',':
                     memory[mc] = handleInput();
-                    pc += 1;
                     break;
                 case '[':
                     OpenLoop();
-                    break;
+                    return false;
                 case ']':
                     CloseLoop();
-                    break;
+                    return false;
                 case 'b':
                     handleBreakpoint(Trace());
-                    pc += 1;
-                    break;
-                default:
-                    // invalid character, continue
-                    pc += 1;
                     break;
             }
+
+            return true;
         }
 
         private void OpenLoop() {
