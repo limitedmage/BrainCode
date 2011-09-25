@@ -8,7 +8,7 @@ education
 
 ## Short description ##
 
-Code esoterically
+Esoteric language IDE
 
 ## Detailed Description ##
 
