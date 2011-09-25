@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+using System.IO.IsolatedStorage;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Coding4Fun.Phone.Controls;
 using Microsoft.Phone.Controls;
-using System.Text;
-using System.IO.IsolatedStorage;
 
 namespace BrainCode {
     public partial class MainPage : PhoneApplicationPage {
         private Dictionary<string, string> _samples = new Dictionary<string, string>() {
+            {"Current", ""},
             {"Hello world", "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."},
-            {"Cat", ",[.,]"},
-            {"Addition", ",>++++++[<-------->-],[<+>-]<."},
+            {"Print input (cat)", ",[.,]"},
+            {"Single-digit Addition", ",>++++++[<-------->-],[<+>-]<."},
             {"Blank", ""}
         };
 
@@ -33,6 +27,10 @@ namespace BrainCode {
 
             if (_settings.Contains("code")) {
                 Code.Text = (string) _settings["code"];
+                _samples["Current"] = Code.Text;
+            } else {
+                Code.Text = _samples["Hello world"];
+                _samples["Current"] = Code.Text;
             }
         }
 
@@ -92,10 +90,19 @@ namespace BrainCode {
             SamplePicker.Open();
         }
 
+        private bool _firing = false;
         private void SamplePicker_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (e.AddedItems.Count > 0) {
-                var item = (KeyValuePair<string, string>) e.AddedItems[0];
-                Code.Text = item.Value;
+            if (!_firing) {
+                _firing = true;
+
+                _samples["Current"] = Code.Text;
+                if (SamplePicker.SelectedItem != null) {
+                    var item = (KeyValuePair<string, string>) SamplePicker.SelectedItem;
+                    Code.Text = item.Value;
+                    SamplePicker.SelectedIndex = 0;
+                }
+
+                _firing = false;
             }
         }
 

@@ -120,7 +120,6 @@
     <Content Include="icons\appbar.transport.play.rest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icons\appbar.keyboard.rest.png">

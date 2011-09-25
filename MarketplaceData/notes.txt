@@ -1,0 +1,27 @@
+## Name ##
+
+BrainCode
+
+## Category ##
+
+education
+
+## Short description ##
+
+Code esoterically
+
+## Detailed Description ##
+
+Code, run and debug brainf*ck programs! Use one of the included samples, or write your own. Use the special keypad for easier coding. Debug your programs with memory and stack trace.
+
+Created by Juliana Peña http://julianapena.com
+
+Open source! Grab the code at https://github.com/limitedmage/BrainCode
+
+## Keywords ##
+
+code, coding, programming
+
+## Email address ##
+
+braincode@julianapena.com

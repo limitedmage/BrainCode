@@ -33,7 +33,7 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="230" />
 				</Grid.RowDefinitions>
-                <TextBox Name="Code" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="0"/>
+                <TextBox Name="Code" AcceptsReturn="True" TextWrapping="Wrap" Grid.Row="0" />
                 <Grid Name="Keyboard" Background="{StaticResource PhoneChromeBrush}" Grid.Row="1" Margin="-12,0">
 					<Grid.RowDefinitions>
 						<RowDefinition />
